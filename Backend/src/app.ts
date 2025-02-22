@@ -33,14 +33,6 @@ app.use(userAuth)
 app.use("/api/user",userRoutes);
 app.use("/api/news",newsRoutes);
 
-// WebSocket Connection
-io.on("connection", (socket) => {
-  console.log("🟢 Client connected:", socket.id);
-
-  socket.on("disconnect", () => {
-    console.log("🔴 Client disconnected");
-  });
-});
 
 // Function to send new news to all clients
 const sendNewNews = (newsItem: any) => {
