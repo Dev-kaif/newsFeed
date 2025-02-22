@@ -17,7 +17,7 @@ const socket = io("https://newsfeed-pnsd.onrender.com");
 
 const NewsFeed: React.FC = () => {
   const [news, setNews] = useState<News[]>([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -41,20 +41,20 @@ const NewsFeed: React.FC = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    navigate('/')
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
-    <div className="min-h-screen bg-[#121212] text-gray-200 flex flex-col items-center">
+    <div className="min-h-screen bg-[#0a0f1e] text-gray-200 flex flex-col items-center">
       {/* Navigation Bar */}
-      <nav className="w-full bg-[#1e1e1e] py-4 px-8 shadow-md flex justify-between items-center fixed top-0 left-0 right-0 z-50">
+      <nav className="w-full bg-[#0d1b3b] py-4 px-8 shadow-md flex justify-between items-center fixed top-0 left-0 right-0 z-50">
         <h1 className="text-2xl font-bold text-white">NewsFeed</h1>
         <div className="flex items-center space-x-6">
-          <span className="text-sm text-red-500 animate-pulse">Live Updates</span>
-          <button 
-            onClick={handleLogout} 
-            className="px-2 py-1 text-sm bg-red-600 hover:bg-red-500 text-white rounded-lg transition-all duration-300 ease-in-out"
+          <span className="text-sm text-red-600 animate-pulse">Live Updates</span>
+          <button
+            onClick={handleLogout}
+            className="px-2 py-1 text-sm bg-blue-900 hover:bg-blue-500 text-white rounded-lg transition-all duration-300 ease-in-out"
           >
             Logout
           </button>
@@ -66,10 +66,10 @@ const NewsFeed: React.FC = () => {
           news.map((item, index) => (
             <div
               key={index}
-              className="bg-[#1e1e1e] p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] hover:shadow-2xl duration-300 ease-in-out"
+              className="bg-[#0d1b3b] p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] hover:shadow-2xl duration-300 ease-in-out"
             >
               <h2 className="text-2xl font-semibold text-gray-100">{item.title}</h2>
-              <p className="text-gray-400 text-sm mt-1">
+              <p className="text-blue-400 text-sm mt-1">
                 {item.source} - {new Date(item.publishedAt).toLocaleString()}
               </p>
               <div className="w-full h-56 mt-4 overflow-hidden rounded-lg">
@@ -91,7 +91,7 @@ const NewsFeed: React.FC = () => {
             </div>
           ))
         ) : (
-          <p className="text-gray-400 text-lg animate-pulse">Fetching latest news...</p>
+          <p className="text-blue-400 text-lg animate-pulse">Fetching latest news...</p>
         )}
       </div>
     </div>
