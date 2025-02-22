@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { MONGO_URL } from "./config";
 
 dotenv.config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI as string || "mongodb+srv://kaifghalib123:KhLjaiiKNGzfm1wC@cluster0.mt9u1.mongodb.net/news");
+    await mongoose.connect(MONGO_URL as string);
   } catch (error) {
     process.exit(1);
   }

@@ -3,7 +3,7 @@ import { z } from "zod";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
-const JWT_USER_SECRET  = "Kaif123"
+import { JWT_SECRET } from "../config/config";
 
 const authRoutes = Router()
 const saltRounds = 5;
@@ -72,7 +72,7 @@ authRoutes.post('/signIn',async (req:Request,res:Response)=>{
     const match = await bcrypt.compare(password,response.password);
 
     if(match){
-        const token = jwt.sign({ id: response._id },JWT_USER_SECRET);
+        const token = jwt.sign({ id: response._id },JWT_SECRET as string);
         res.json({token:token,message:"You have sucessfully Signed In"})
 
     }else {

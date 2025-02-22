@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import axios from "axios";
 import { sendNewNews } from "../app";
+import { NEWS_API_KEY } from "../config/config";
 
 // API Key (ensure to store in environment variables)
-const NEWS_API_KEY = process.env.NEWS_API_KEY || "a6a9f67714624c539689d1ad497c1ea9";
 const NEWS_API_URL = "https://newsapi.org/v2/top-headlines";
 
 // Define TypeScript Interface for News API Response
@@ -34,7 +34,7 @@ export const getNews = async (req: Request, res: Response) => {
       params: {
         country: "us",
         category: req.query.category || "general",
-        apiKey: NEWS_API_KEY,
+        apiKey: NEWS_API_KEY as string,
       },
     });
 

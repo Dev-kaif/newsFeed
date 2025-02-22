@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import axios from "../utils/axios";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../utils/config";
 
 // Define the News type
 interface News {
@@ -13,7 +14,7 @@ interface News {
   publishedAt: string;
 }
 
-const socket = io("https://newsfeed-pnsd.onrender.com");
+const socket = io(`${BACKEND_URL}`);
 
 const NewsFeed: React.FC = () => {
   const [news, setNews] = useState<News[]>([]);
@@ -22,7 +23,7 @@ const NewsFeed: React.FC = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("https://newsfeed-pnsd.onrender.com/api/news");
+        const response = await axios.get(`${BACKEND_URL}/api/news`);
         setNews(response.data);
       } catch (error) {
         console.error("Error fetching news:", error);
