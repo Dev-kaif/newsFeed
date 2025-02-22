@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db";
 import newsRoutes from "./routes/newsRoutes";
 import authRoutes from "./routes/authRoutes";
+import userRoutes from "./routes/userRoutes";
 import userAuth from "./middelware/auth";
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth",authRoutes );
 app.use(userAuth)
+app.use("/api/user",userRoutes);
 app.use("/api/news",newsRoutes);
 
 // WebSocket Connection
@@ -40,4 +42,9 @@ io.on("connection", (socket) => {
   });
 });
 
-export { app, server,io };
+// Function to send new news to all clients
+const sendNewNews = (newsItem: any) => {
+  io.emit("newNews", newsItem); // Broadcast new news
+};
+
+export { app, server,io,sendNewNews };

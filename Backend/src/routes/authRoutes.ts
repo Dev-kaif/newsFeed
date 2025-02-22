@@ -16,7 +16,8 @@ const reqBody = z.object({
 
 
 authRoutes.post('/signUp',async (req:Request,res:Response)=>{
-
+    console.log(req.body);
+    
     const safeParseData = reqBody.safeParse(req.body);
 
     if(!safeParseData.success){

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import axios from "axios";
+import { sendNewNews } from "../app";
 
 const NEWS_API_KEY = process.env.NEWS_API_KEY || "a6a9f67714624c539689d1ad497c1ea9";
 const NEWS_API_URL = "https://newsapi.org/v2/top-headlines";
@@ -25,7 +26,10 @@ export const getNews = async (req: Request, res: Response) => {
       publishedAt: article.publishedAt,
     }));
 
+    articles.forEach((newsItem:any) => sendNewNews(newsItem));
+
     res.json(articles);
+
   } catch (error) {
     console.error("Error fetching news:", error);
     res.status(500).json({ message: "Error fetching news" });
