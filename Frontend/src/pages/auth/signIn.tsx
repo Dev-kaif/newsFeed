@@ -24,12 +24,26 @@ const Signin = () => {
   const navigate = useNavigate()
 
   const onSubmit = async (data: SigninFormValues) => {
-    const res = await axios.post(`${BACKEND_URL}/api/auth/signin`,data);
-    alert(res.data.message);
-    localStorage.setItem('token',res.data.token)
-    navigate('/newsFeed')
+    try {
+      const res = await axios.post(`${BACKEND_URL}/api/auth/signin`, data);
+      
+      alert(res.data.message);
+      localStorage.setItem('token', res.data.token);
+      navigate('/newsFeed');
+      
+    } catch (error) {
+      console.error("Signin Error:", error);
+  
+      if (axios.isAxiosError(error)) {
+        // Handle Axios-specific errors (e.g., API response errors)
+        alert(error.response?.data?.message || "Invalid credentials, please try again.");
+      } else {
+        // Handle generic or unexpected errors
+        alert("An unexpected error occurred. Please try again later.");
+      }
+    }
   };
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
       <div className="w-full max-w-md bg-gray-800 shadow-lg rounded-lg p-6">

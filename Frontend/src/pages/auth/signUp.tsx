@@ -26,10 +26,24 @@ const Signup = () => {
 
 
   const onSubmit = async (data: SignupFormValues) => {
-    const res = await axios.post(`${BACKEND_URL}/api/auth/signUp`,data);
-    alert(res.data.message);
-    navigate('/auth/signIn')
+    try {
+      const res = await axios.post(`${BACKEND_URL}/api/auth/signUp`, data);
+      alert(res.data.message);
+      navigate('/auth/signIn');
+    } catch (error) {
+      console.error("Signup Error:", error);
+  
+      if (axios.isAxiosError(error)) {
+        // Handle Axios-specific errors
+        alert(error.response?.data?.message || "An error occurred during signup.");
+      } else {
+        // Handle generic errors
+        alert("An unexpected error occurred. Please try again.");
+      }
+    }
   };
+  
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
