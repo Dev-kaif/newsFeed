@@ -1,4 +1,4 @@
-import { Newspaper, ArrowRight, TrendingUp, Users, Shield, Moon, Sun } from 'lucide-react';
+import { Newspaper, ArrowRight, TrendingUp, Users, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 function App() {

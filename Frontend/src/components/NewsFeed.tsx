@@ -13,7 +13,7 @@ interface News {
   publishedAt: string;
 }
 
-const socket = io("http://localhost:5000");
+const socket = io("https://newsfeed-pnsd.onrender.com");
 
 const NewsFeed: React.FC = () => {
   const [news, setNews] = useState<News[]>([]);
@@ -22,7 +22,7 @@ const NewsFeed: React.FC = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/news");
+        const response = await axios.get("https://newsfeed-pnsd.onrender.com/api/news");
         setNews(response.data);
       } catch (error) {
         console.error("Error fetching news:", error);
